@@ -5,6 +5,8 @@ import com.example.capstone2.Model.ThreadReply;
 import com.example.capstone2.Service.ThreadReplyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -15,34 +17,39 @@ import org.springframework.web.bind.annotation.*;
 public class ThreadReplayController {
     private final ThreadReplyService threadReplyService;
 
+    Logger logger = LoggerFactory.getLogger(ThreadReplayController.class);
 
 
     @GetMapping("/replies")
     public ResponseEntity getAllReplies(){
+        logger.info("all replies requested");
         return ResponseEntity.ok(threadReplyService.getAllThreadReplies());
     }
 
-    public ResponseEntity addReplay(@RequestBody @Valid ThreadReply threadReply, Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    @PostMapping("/add")
+    public ResponseEntity addReply(@RequestBody @Valid ThreadReply threadReply){
         threadReplyService.addThreadReply(threadReply);
+        logger.info("reply added");
         return ResponseEntity.ok(new ApiResponse("thread reply added"));
     }
 
-    public ResponseEntity updateReply(@PathVariable Integer threadReplyId,@RequestBody @Valid ThreadReply threadReply, Errors errors) {
-        if (errors.hasErrors()) {
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    @PutMapping("/updateReply")
+    public ResponseEntity updateReply(@PathVariable Integer threadReplyId,@RequestBody @Valid ThreadReply threadReply) {
         threadReplyService.updateThreadReply(threadReplyId, threadReply);
+        logger.info("reply updated");
         return  ResponseEntity.ok(new ApiResponse("thread reply updated"));
     }
 
+    @DeleteMapping("/removeReply")
     public ResponseEntity removeReply(@PathVariable Integer threadReplyId){
         threadReplyService.removeThreadReply(threadReplyId);
+        logger.info("reply removed");
         return ResponseEntity.ok(new ApiResponse("reply removed"));
     }
+
+    @GetMapping("/thread-replies/{threadId}")
     public ResponseEntity getAllRepliesByThreadId(Integer threadId){
+        logger.info("replies for a thread requested");
         return ResponseEntity.ok(threadReplyService.getAllRepliesByThreadId(threadId));
     }
 }

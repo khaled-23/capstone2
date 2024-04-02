@@ -14,7 +14,7 @@ public class Artist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer artistId;
     @NotEmpty(message = "name should not be empty")
-    @Pattern(regexp = "^[A-Za-z]+$")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "name should contain only letters")
     @Column(columnDefinition = "VARCHAR(20) NOT NULL")
     private String name;
     @NotEmpty(message = "username should not be empty")
