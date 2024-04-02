@@ -45,4 +45,10 @@ public class ArtistPreviewController {
         artistPreviewService.removePreview(previewId);
         return ResponseEntity.ok(new ApiResponse("preview removed"));
     }
+
+    @GetMapping("/artist-previews")
+    public ResponseEntity getArtistPreviews(Integer artistId){
+        return ResponseEntity.ok(artistPreviewService.getArtistPreviews(artistId));
+    }
+
 }

@@ -33,7 +33,11 @@ public class ArtistThread {
     @NotNull(message = "visibility should not null")
     @AssertTrue(message = "visibility by default should be true")
     @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
-    private Boolean visibility;
+    private Boolean isVisible;
+    @NotNull(message = "is important should not be null")
+    @AssertFalse(message = "is important should be false")
+    @Column(columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
+    private Boolean isImportant;
     @NotNull(message = "artist id should not be empty")
     @Column(columnDefinition = "INT NOT NULL")
     private Integer artistId;

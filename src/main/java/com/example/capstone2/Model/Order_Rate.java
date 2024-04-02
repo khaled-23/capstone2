@@ -18,6 +18,7 @@ public class Order_Rate {
     @Max(value = 5, message = "maximum rate should be 5")
     @Column(columnDefinition = "INT NOT NULL CHECK(rate>=1 or rate<=5)")
     private Integer rate;
+    @NotNull(message = "order id should not be null")
     @Column(columnDefinition = "INT NOT NULL UNIQUE")
     private Integer orderId;
 }

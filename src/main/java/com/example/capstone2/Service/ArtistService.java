@@ -147,6 +147,7 @@ public class ArtistService {
                 }
             }
         }
+
         return highestRatedArtist;
     }
 

@@ -92,4 +92,5 @@ public class ArtistController {
         return ResponseEntity.ok(artistService.highestRatedArtist());
     }
 
+
 }

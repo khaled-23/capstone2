@@ -23,5 +23,6 @@ public class Note {
     @Column(columnDefinition = "VARCHAR(200) NOT NULL")
     private String content;
     @NotNull(message = "order id should not be empty")
+    @Column(columnDefinition = "INT NOT NULL")
     private Integer orderId;
 }

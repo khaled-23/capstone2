@@ -45,4 +45,17 @@ public class ArtistPreviewService {
     }
 
 
+    public List<ArtistPreview> getArtistPreviews(Integer artistId){
+        boolean doesArtistExists = artistRepository.existsById(artistId);
+        if(!doesArtistExists){
+            throw new ApiException("artist does not exists");
+        }
+        List<ArtistPreview> artistPreviews = artistPreviewRepository.findArtistPreviewsByArtistId(artistId);
+        if(artistPreviews.isEmpty()){
+            throw new ApiException("artist does not have previews");
+        }
+        return artistPreviews;
+    }
+
+
 }

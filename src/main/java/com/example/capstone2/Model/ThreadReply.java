@@ -26,7 +26,9 @@ public class ThreadReply {
     @Column(columnDefinition = "DATE NOT NULL")
     private LocalDate replyDate;
     @NotNull(message = "artist id should not be null")
+    @Column(columnDefinition = "INT NOT NULL")
     private Integer artistId;
     @NotNull(message = "thread id should not be null")
+    @Column(columnDefinition = "INT NOT NULL")
     private Integer threadId;
 }
